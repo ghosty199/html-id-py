@@ -1,0 +1,28 @@
+hname=""
+def openfile():
+    global name
+    my_text.delete(1.0, END)
+    inputbox.delete(0, END)
+    textfile=filedialog.askopenfilename(title="opentextfile",filetypes=(("textfiles","*.txt"),))
+    
+    print(textfile)
+    name=os.path.basename(textfile)
+    formattedname=name.split('.')[0]
+    inputbox.insert(END,formattedname)
+    root.title(formattedname)
+    textfile=open(name,'r')
+    paragraph=textfile.read()
+    my_text.insert(END, paragraph)
+    textfile.close()
+    
+def save():
+    inputname=inputbox.get()
+    file=open(inputname+".txt","w")
+    data=my_text.get("1.0",END)
+    file.write(data)
+    my_text.delete(1.0, END)
+    inputbox.delete(0, END)
+    messagebox.showinfo("update", "secuess") 
+    
+def window():
+    root.destroy()
